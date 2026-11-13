@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Siam Carnival Winter Wonder Nights</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mitr:wght@400;500;600&family=Sarabun:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Ice City: deep winter night, frosted panels, one icy-cyan accent. Single-theme by choice. */
+  --night:#07142b;
+  --deep:#0d2347;
+  --frost:rgba(214,236,255,.08);
+  --line:rgba(190,225,255,.22);
+  --ice:#9fe3ff;
+  --snow:#f2f8ff;
+  --muted:#a9c2de;
+  --display:"Mitr","Sarabun",system-ui,sans-serif;
+  --body:"Sarabun",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--night);color:var(--snow);font-family:var(--body);font-size:17px;line-height:1.6;
+  background-image:radial-gradient(1200px 600px at 50% -10%,#1b3f73 0%,transparent 60%),linear-gradient(180deg,var(--night),var(--deep) 60%,var(--night));}
+img{max-width:100%;display:block}
+h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.2;text-wrap:balance;margin:0}
+a{color:var(--ice)}
+:focus-visible{outline:2px solid var(--ice);outline-offset:3px;border-radius:6px}
+
+/* snow */
+#snow{position:fixed;inset:0;pointer-events:none;z-index:0}
+main,header,nav,footer{position:relative;z-index:1}
+
+/* hero */
+.hero{position:relative;min-height:min(78vh,720px);display:flex;align-items:flex-end;overflow:hidden}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,20,43,.15) 0%,rgba(7,20,43,.35) 45%,var(--night) 100%)}
+.hero-text{position:relative;z-index:1;padding:28px 20px 34px;max-width:960px;margin:0 auto;width:100%}
+.kicker{display:inline-block;font-family:var(--display);font-size:14px;letter-spacing:.08em;color:var(--night);background:var(--ice);padding:4px 12px;border-radius:999px}
+.hero h1{font-size:clamp(34px,8vw,64px);margin-top:12px;text-shadow:0 2px 20px rgba(0,0,0,.45)}
+.hero p{margin:8px 0 0;font-size:clamp(17px,4.2vw,22px);color:#dcecff}
+
+/* nav */
+nav{position:sticky;top:0;z-index:5;background:rgba(7,20,43,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav ul{list-style:none;margin:0 auto;padding:10px 16px;display:flex;gap:8px;max-width:960px;overflow-x:auto}
+nav a{display:block;white-space:nowrap;text-decoration:none;color:var(--snow);font-family:var(--display);font-size:15px;padding:7px 14px;border:1px solid var(--line);border-radius:999px;background:var(--frost)}
+nav a:hover{border-color:var(--ice)}
+
+/* sections */
+section{max-width:960px;margin:0 auto;padding:40px 16px 8px}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:18px;border-bottom:1px solid var(--line);padding-bottom:10px}
+.sec-head h2{font-size:clamp(26px,6vw,36px)}
+.sec-head span{color:var(--muted);font-size:15px}
+
+/* video */
+.video-wrap{border-radius:16px;overflow:hidden;border:1px solid var(--line);background:#000}
+.video-wrap video{display:block;width:100%;aspect-ratio:16/9;background:#000}
+.vid-status{margin:8px 2px 0;color:var(--muted);font-size:14px}
+.vid-status:empty{display:none}
+
+/* atmosphere grid */
+.gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.gallery figure{margin:0;position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line);cursor:zoom-in}
+.gallery figure.wide{grid-column:span 2}
+.gallery img{width:100%;aspect-ratio:3/2;object-fit:cover;transition:transform .4s}
+.gallery figure.wide img{aspect-ratio:16/9}
+.gallery figure:hover img{transform:scale(1.03)}
+.gallery figcaption{position:absolute;left:0;right:0;bottom:0;padding:22px 12px 9px;font-size:15px;background:linear-gradient(transparent,rgba(7,20,43,.85))}
+
+/* rides */
+.rides{display:grid;grid-template-columns:1fr;gap:14px}
+.ride{display:grid;grid-template-columns:1fr;background:var(--frost);border:1px solid var(--line);border-radius:16px;overflow:hidden;cursor:zoom-in}
+.ride img{width:100%;aspect-ratio:3/2;object-fit:cover}
+.ride .tall{object-position:50% 35%}
+.ride-body{padding:14px 16px 16px;display:grid;gap:4px}
+.ride-body .no{font-family:var(--display);font-size:13px;color:var(--ice);letter-spacing:.06em}
+.ride-body h3{font-size:22px}
+.ride-body p{margin:0;color:var(--muted)}
+@media (min-width:700px){
+  .gallery{grid-template-columns:repeat(3,1fr)}
+  .gallery figure.wide{grid-column:span 3}
+  .rides{grid-template-columns:repeat(2,1fr)}
+}
+
+/* info */
+.info{display:grid;gap:12px;background:var(--frost);border:1px solid var(--line);border-radius:16px;padding:18px 18px}
+.info dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:8px 16px}
+.info dt{font-family:var(--display);color:var(--ice)}
+.info dd{margin:0}
+footer{text-align:center;color:var(--muted);font-size:14px;padding:36px 16px 48px}
+
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:20;background:rgba(3,10,24,.94);display:none;align-items:center;justify-content:center;padding:16px;flex-direction:column;gap:12px}
+.lb.open{display:flex}
+.lb img{max-height:80vh;width:auto;border-radius:10px}
+.lb p{margin:0;font-family:var(--display)}
+.lb button{position:absolute;top:12px;right:12px;font:inherit;font-size:16px;color:var(--snow);background:var(--frost);border:1px solid var(--line);border-radius:999px;padding:6px 14px;cursor:pointer}
+
+@media (prefers-reduced-motion:reduce){#snow{display:none}html{scroll-behavior:auto}.gallery img{transition:none}}
+</style>
+</head>
+<body>
+<canvas id="snow" aria-hidden="true"></canvas>
+
+<header class="hero">
+  <img src="img/hero-snow-85.jpg" alt="ปาร์ตี้หิมะหน้าชิงช้าสวรรค์ยามค่ำคืน">
+  <div class="hero-text">
+    <span class="kicker">SIAM CARNIVAL</span>
+    <h1>Winter Wonder<br>Nights</h1>
+    <p>ค่ำคืนมหัศจรรย์แห่งความสุข · มหกรรมสวนสนุกนานาชาติ<br>@สุนีย์ทาวเวอร์ อุบลราชธานี · 4 ธันวาคม 2569 – 3 มกราคม 2570</p>
+  </div>
+</header>
+
+<nav aria-label="เมนู">
+  <ul>
+    <li><a href="#video">วิดีโอ</a></li>
+    <li><a href="#atmosphere">บรรยากาศงาน</a></li>
+    <li><a href="#rides">เครื่องเล่น</a></li>
+    <li><a href="#info">ข้อมูลงาน</a></li>
+  </ul>
+</nav>
+
+<main>
+  <section id="video">
+    <div class="sec-head"><h2>วิดีโอบรรยากาศ</h2><span>15 วินาที · แตะเพื่อเปิดเสียง</span></div>
+    <div class="video-wrap">
+      <video id="vid" poster="vid/poster.jpg" controls muted loop playsinline webkit-playsinline preload="none"></video>
+    </div>
+    <p class="vid-status" id="vidStatus">กำลังโหลดวิดีโอ…</p>
+  </section>
+
+  <section id="atmosphere">
+    <div class="sec-head"><h2>บรรยากาศงาน</h2><span>แตะที่รูปเพื่อดูภาพใหญ่</span></div>
+    <div class="gallery">
+      <figure class="wide"><img src="img/atm-aerial-323.jpg" alt="ภาพมุมสูงทั้งงาน" loading="lazy"><figcaption>ภาพมุมสูงทั้งงาน</figcaption></figure>
+      <figure><img src="img/atm-snowparty-337.jpg" alt="ปาร์ตี้หิมะ" loading="lazy"><figcaption>ปาร์ตี้หิมะ</figcaption></figure>
+      <figure><img src="img/atm-tree-96.jpg" alt="ลานต้นคริสต์มาส" loading="lazy"><figcaption>ลานต้นคริสต์มาส</figcaption></figure>
+      <figure><img src="img/atm-entrance-4.jpg" alt="ซุ้มทางเข้างาน" loading="lazy"><figcaption>ซุ้มทางเข้างาน</figcaption></figure>
+      <figure><img src="img/atm-night-304.jpg" alt="ความคึกคักยามค่ำคืน" loading="lazy"><figcaption>ความคึกคักยามค่ำคืน</figcaption></figure>
+      <figure class="wide"><img src="img/atm-aerial2-327.jpg" alt="โซนเครื่องเล่นและร้านค้า" loading="lazy"><figcaption>โซนเครื่องเล่นและร้านค้า</figcaption></figure>
+    </div>
+  </section>
+
+  <section id="rides">
+    <div class="sec-head"><h2>เครื่องเล่น</h2><span>6 เครื่องเล่นเด่น</span></div>
+    <div class="rides">
+      <article class="ride"><img src="img/ride-ferris-1.jpg" alt="ชิงช้าสวรรค์" loading="lazy"><div class="ride-body"><span class="no">01</span><h3>ชิงช้าสวรรค์</h3><p>ชมไฟทั้งงานจากมุมสูง ยิ่งสวยตอนกลางคืน</p></div></article>
+      <article class="ride"><img src="img/ride-dragon-18.jpg" alt="Dragon Race" loading="lazy"><div class="ride-body"><span class="no">02</span><h3>Dragon Race</h3><p>รถไฟมังกรวิ่งวนรอบราง สนุกได้ทั้งครอบครัว</p></div></article>
+      <article class="ride"><img src="img/ride-shell-25.jpg" alt="Spinning Shell" loading="lazy"><div class="ride-body"><span class="no">03</span><h3>Spinning Shell</h3><p>เปลือกหอยหมุนติ้ว สีสันสดใส ถูกใจเด็ก ๆ</p></div></article>
+      <article class="ride"><img src="img/ride-boat-51.jpg" alt="เรือบัมเปอร์ในสระน้ำ" loading="lazy"><div class="ride-body"><span class="no">04</span><h3>เรือบัมเปอร์</h3><p>พายเรือชนกันในสระน้ำ เล่นเพลินจนลืมเวลา</p></div></article>
+      <article class="ride"><img class="tall" src="img/ride-swing-343.jpg" alt="เรือไวกิ้ง" loading="lazy"><div class="ride-body"><span class="no">05</span><h3>เรือไวกิ้ง</h3><p>เหวี่ยงขึ้นสูงสุดแขน สำหรับสายหวาดเสียว</p></div></article>
+      <article class="ride"><img src="img/ride-thrill-38.jpg" alt="เครื่องเล่นหมุนเหวี่ยง" loading="lazy"><div class="ride-body"><span class="no">06</span><h3>เครื่องเล่นหมุนเหวี่ยง</h3><p>หมุนเร็ว ลมแรง ท้าความกล้า</p></div></article>
+    </div>
+  </section>
+
+  <section id="info">
+    <div class="sec-head"><h2>ข้อมูลงาน</h2></div>
+    <div class="info">
+      <dl>
+        <dt>งาน</dt><dd>Siam Carnival Winter Wonder Nights<br>มหกรรมสวนสนุกนานาชาติ</dd>
+        <dt>วันจัดงาน</dt><dd>4 ธันวาคม 2569 – 3 มกราคม 2570</dd>
+        <dt>สถานที่</dt><dd>สุนีย์ทาวเวอร์ อำเภอเมือง จังหวัดอุบลราชธานี</dd>
+      </dl>
+    </div>
+  </section>
+</main>
+
+<footer>Siam Carnival Winter Wonder Nights · สุนีย์ทาวเวอร์ อุบลราชธานี</footer>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="ภาพขยาย">
+  <button type="button" id="lbClose">ปิด ✕</button>
+  <img id="lbImg" alt="">
+  <p id="lbCap"></p>
+</div>
+
+<script>
+(function(){
+  // video: load the whole file as a blob so phones that need byte-range requests can still play it
+  const v=document.getElementById('vid'),st=document.getElementById('vidStatus'),SRC='vid/ice-city-m.mp4';
+  function ready(){st.textContent='';v.play().catch(()=>{st.textContent='แตะปุ่มเล่นเพื่อดูวิดีโอ';});}
+  fetch(SRC).then(r=>{if(!r.ok)throw new Error(r.status);return r.blob();})
+    .then(b=>{v.src=URL.createObjectURL(new Blob([b],{type:'video/mp4'}));v.load();v.addEventListener('canplay',ready,{once:true});})
+    .catch(()=>{v.src=SRC;v.preload='metadata';v.addEventListener('canplay',ready,{once:true});});
+  v.addEventListener('error',()=>{st.textContent='เปิดวิดีโอไม่ได้ ลองรีเฟรชหน้าอีกครั้ง';});
+
+  // lightbox
+  const lb=document.getElementById('lb'),li=document.getElementById('lbImg'),lc=document.getElementById('lbCap');
+  document.querySelectorAll('.gallery figure, .ride').forEach(el=>{
+    el.tabIndex=0;
+    const open=()=>{const im=el.querySelector('img');li.src=im.src;li.alt=im.alt;lc.textContent=im.alt;lb.classList.add('open');};
+    el.addEventListener('click',open);
+    el.addEventListener('keydown',e=>{if(e.key==='Enter')open();});
+  });
+  const close=()=>lb.classList.remove('open');
+  document.getElementById('lbClose').addEventListener('click',close);
+  lb.addEventListener('click',e=>{if(e.target===lb)close();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')close();});
+
+  // gentle snowfall
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  const c=document.getElementById('snow'),x=c.getContext('2d');let W,H,f=[];
+  function size(){W=c.width=innerWidth;H=c.height=innerHeight;}
+  size();addEventListener('resize',size);
+  for(let i=0;i<70;i++)f.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*2.2+.6,s:Math.random()*.6+.3,d:Math.random()*Math.PI*2});
+  (function tick(){x.clearRect(0,0,W,H);x.fillStyle='rgba(240,248,255,.8)';
+    for(const p of f){p.y+=p.s;p.d+=.01;p.x+=Math.sin(p.d)*.3;if(p.y>H){p.y=-5;p.x=Math.random()*W;}
+      x.beginPath();x.arc(p.x,p.y,p.r,0,6.283);x.fill();}
+    requestAnimationFrame(tick);})();
+})();
+</script>
+</body>
+</html>
